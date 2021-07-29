@@ -10,4 +10,6 @@ public interface IMateriaService {
     public MateriaDto consultarMateria(final Long id);
     public Boolean atualizarMateria(final MateriaDto materiaDto);
     public Boolean excluirMateria(final Long id);
+    public List<MateriaDto> listarMateriasPorHorarioMinimo(int horaMinima);
+    public List<MateriaDto> listarMateriasPorFrequencia(int frequencia);
 }
