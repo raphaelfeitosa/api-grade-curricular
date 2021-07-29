@@ -1,5 +1,6 @@
 package com.cliente.escola.gradecurricular.services;
 
+import com.cliente.escola.gradecurricular.controllers.MateriaController;
 import com.cliente.escola.gradecurricular.dto.MateriaDto;
 import com.cliente.escola.gradecurricular.entities.MateriaEntity;
 import com.cliente.escola.gradecurricular.exceptions.MateriaException;
@@ -7,7 +8,9 @@ import com.cliente.escola.gradecurricular.repositories.IMateriaRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.*;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -45,9 +48,15 @@ public class MateriaService implements IMateriaService {
     @Override
     public List<MateriaDto> listarMaterias() {
         try {
-            return this.modelMapper.map(this.iMateriaRepository.findAll(),
+            List<MateriaDto> materiaDto = this.modelMapper.map(this.iMateriaRepository.findAll(),
                     new TypeToken<List<MateriaDto>>() {
                     }.getType());
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                            .consultarMateria(materiaDtoResponse.getId()))
+                            .withSelfRel()));
+            return materiaDto;
+
         } catch (Exception exception) {
             throw new MateriaException(MENSAGEM_ERRO,
                     HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,16 +81,42 @@ public class MateriaService implements IMateriaService {
         }
     }
 
+    @CachePut(unless = "#result.size()<3")
+    @Override
+    public List<MateriaDto> listarMateriasPorHorarioMinimo(int horaMinima) {
+        List<MateriaDto> materiaDto = this.modelMapper.map(iMateriaRepository.findByHorarioMinimo(horaMinima),
+                new TypeToken<List<MateriaDto>>() {
+                }.getType());
+        materiaDto.forEach(materiaDtoResponse ->
+                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                        .consultarMateria(materiaDtoResponse.getId()))
+                        .withSelfRel()));
+        return materiaDto;
+    }
+
+    @CachePut(unless = "#result.size()<3")
+    @Override
+    public List<MateriaDto> listarMateriasPorFrequencia(int frequencia) {
+        List<MateriaDto> materiaDto = this.modelMapper.map(iMateriaRepository.findByFrequencia(frequencia),
+                new TypeToken<List<MateriaDto>>() {
+                }.getType());
+        materiaDto.forEach(materiaDtoResponse ->
+                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                        .consultarMateria(materiaDtoResponse.getId()))
+                        .withSelfRel()));
+        return materiaDto;
+    }
+
     @Override
     public Boolean atualizarMateria(MateriaDto materiaDto) {
         try {
             this.consultarMateria(materiaDto.getId());
-                MateriaEntity materiaEntityAtualizada = this.modelMapper.map(materiaDto, MateriaEntity.class);
-                this.iMateriaRepository.save(materiaEntityAtualizada);
+            MateriaEntity materiaEntityAtualizada = this.modelMapper.map(materiaDto, MateriaEntity.class);
+            this.iMateriaRepository.save(materiaEntityAtualizada);
             return Boolean.TRUE;
         } catch (MateriaException materiaException) {
             throw materiaException;
-        } catch (Exception exception){
+        } catch (Exception exception) {
             throw exception;
         }
     }
