@@ -7,17 +7,19 @@ import com.cliente.escola.gradecurricular.repositories.IMateriaRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@CacheConfig(cacheNames = {"materias"})
 @Service
 public class MateriaService implements IMateriaService {
 
     private static final String MENSAGEM_ERRO = "Erro interno identificado. Contate o suporte";
-    private static final String MATERIA_NÃO_ENCONTRADA = "Matéria não encontrada";
+    private static final String MATERIA_NAO_ENCONTRADA = "Matéria não encontrada";
     private final IMateriaRepository iMateriaRepository;
     private final ModelMapper modelMapper;
 
@@ -39,6 +41,7 @@ public class MateriaService implements IMateriaService {
         }
     }
 
+    @CachePut(unless = "#result.size()<3")
     @Override
     public List<MateriaDto> listarMaterias() {
         try {
@@ -51,6 +54,7 @@ public class MateriaService implements IMateriaService {
         }
     }
 
+    @CachePut(key = "#id")
     @Override
     public MateriaDto consultarMateria(Long id) {
         try {
@@ -58,7 +62,7 @@ public class MateriaService implements IMateriaService {
             if (materiaEntityOptional.isPresent()) {
                 return this.modelMapper.map(materiaEntityOptional.get(), MateriaDto.class);
             }
-            throw new MateriaException(MATERIA_NÃO_ENCONTRADA,
+            throw new MateriaException(MATERIA_NAO_ENCONTRADA,
                     HttpStatus.NOT_FOUND);
         } catch (MateriaException materiaException) {
             throw materiaException;
