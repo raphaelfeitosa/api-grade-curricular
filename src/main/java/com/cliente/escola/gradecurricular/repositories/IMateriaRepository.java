@@ -9,8 +9,11 @@ import java.util.List;
 
 public interface IMateriaRepository extends JpaRepository<MateriaEntity, Long> {
     @Query("SELECT m FROM MateriaEntity m WHERE m.horas >= :horaMinima")
-    public List<MateriaEntity> findByHorarioMinimo(@Param("horaMinima") int horaMinima);
+    List<MateriaEntity> findByHorarioMinimo(@Param("horaMinima") int horaMinima);
 
     @Query("SELECT m FROM MateriaEntity m WHERE m.frequencia = :frequencia")
-    public List<MateriaEntity> findByFrequencia(@Param("frequencia") int frequencia);
+    List<MateriaEntity> findByFrequencia(@Param("frequencia") int frequencia);
+
+    @Query("SELECT m FROM MateriaEntity m WHERE m.codigo =:codigo")
+    MateriaEntity findByCodigo(@Param("codigo") String codigo);
 }
