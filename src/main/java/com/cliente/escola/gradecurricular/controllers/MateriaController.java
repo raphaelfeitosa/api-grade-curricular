@@ -1,9 +1,8 @@
 package com.cliente.escola.gradecurricular.controllers;
 
+import com.cliente.escola.gradecurricular.constant.HyperLinkConstant;
 import com.cliente.escola.gradecurricular.dto.MateriaDto;
-import com.cliente.escola.gradecurricular.entities.MateriaEntity;
 import com.cliente.escola.gradecurricular.models.Response;
-import com.cliente.escola.gradecurricular.repositories.IMateriaRepository;
 import com.cliente.escola.gradecurricular.services.IMateriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -17,9 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/materias")
 public class MateriaController {
-    private static final String DELETE = "DELETE";
-    private static final String UPDATE = "UPDATE";
-    private static final String LIST = "GET_ALL";
 
     @Autowired
     private IMateriaService iMateriaService;
@@ -43,20 +39,20 @@ public class MateriaController {
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).consultarMateria(id))
                 .withSelfRel());
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).atualizarMateria(materiaDto))
-                .withRel(UPDATE));
+                .withRel(HyperLinkConstant.ATUALIZAR.getValor()));
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).excluirMateria(id))
-                .withRel(DELETE));
+                .withRel(HyperLinkConstant.EXCLUIR.getValor()));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/horario-minimo/{horaMinima}")
-    public ResponseEntity<Response<List<MateriaDto>>> listarMateriaPorHoraMinima(@PathVariable int horaMinima) {
+    public ResponseEntity<Response<List<MateriaDto>>> listarMateriasPorHoraMinima(@PathVariable int horaMinima) {
         Response<List<MateriaDto>> response = new Response<>();
         List<MateriaDto> materiaDto = this.iMateriaService.listarMateriasPorHorarioMinimo(horaMinima);
         response.setData(materiaDto);
         response.setStatusCode(HttpStatus.OK.value());
         response.add(WebMvcLinkBuilder
-                .linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).listarMateriaPorHoraMinima(horaMinima))
+                .linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).listarMateriasPorHoraMinima(horaMinima))
                 .withSelfRel());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -81,9 +77,9 @@ public class MateriaController {
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).cadastrarMateria(materiaDto))
                 .withSelfRel());
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).atualizarMateria(materiaDto))
-                .withRel(UPDATE));
+                .withRel(HyperLinkConstant.ATUALIZAR.getValor()));
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).listarMaterias())
-                .withRel(LIST));
+                .withRel(HyperLinkConstant.LISTAR.getValor()));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -95,7 +91,7 @@ public class MateriaController {
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).atualizarMateria(materiaDto))
                 .withSelfRel());
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).listarMaterias())
-                .withRel(LIST));
+                .withRel(HyperLinkConstant.LISTAR.getValor()));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -107,7 +103,7 @@ public class MateriaController {
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).excluirMateria(id))
                 .withSelfRel());
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).listarMaterias())
-                .withRel(LIST));
+                .withRel(HyperLinkConstant.LISTAR.getValor()));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
