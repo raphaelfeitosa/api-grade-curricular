@@ -38,6 +38,8 @@ public class MateriaController {
         response.setStatusCode(HttpStatus.OK.value());
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).consultarMateria(id))
                 .withSelfRel());
+        response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).listarMaterias())
+                .withRel(HyperLinkConstant.LISTAR.getValor()));
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).atualizarMateria(materiaDto))
                 .withRel(HyperLinkConstant.ATUALIZAR.getValor()));
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).excluirMateria(id))
@@ -90,8 +92,12 @@ public class MateriaController {
         response.setStatusCode(HttpStatus.OK.value());
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).atualizarMateria(materiaDto))
                 .withSelfRel());
+        response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).atualizarMateria(materiaDto))
+                .withRel(HyperLinkConstant.ATUALIZAR.getValor()));
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).listarMaterias())
                 .withRel(HyperLinkConstant.LISTAR.getValor()));
+        response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).excluirMateria(materiaDto.getId()))
+                .withRel(HyperLinkConstant.EXCLUIR.getValor()));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
