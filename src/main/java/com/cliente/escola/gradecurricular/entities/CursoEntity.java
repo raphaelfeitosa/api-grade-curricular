@@ -1,16 +1,16 @@
 package com.cliente.escola.gradecurricular.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_curso")
+@Table(name = "tb_cursos")
 @Data
 @NoArgsConstructor
 public class CursoEntity implements Serializable {
@@ -30,7 +30,9 @@ public class CursoEntity implements Serializable {
     @Column(name = "codigo")
     private String codigo;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "materia_id")
-    private List<MateriaEntity> materias;
+    @ManyToMany
+    @JoinTable(name = "tb_curso_materia",
+            joinColumns = @JoinColumn(name = "curso_id"),
+            inverseJoinColumns = @JoinColumn(name = "materia_id"))
+    private List<MateriaEntity> materias = new ArrayList<>();
 }
