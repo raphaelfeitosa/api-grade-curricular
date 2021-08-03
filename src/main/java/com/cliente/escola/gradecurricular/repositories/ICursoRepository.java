@@ -5,9 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Optional;
-
 public interface ICursoRepository extends JpaRepository<CursoEntity, Long> {
-    @Query("SELECT c FROM CursoEntity c WHERE c.codigo = :codigo")
-    CursoEntity findCursoByCodigo(@Param("codigo") String codigo);
+    @Query("SELECT c FROM CursoEntity c WHERE LOWER(c.codigo) = :codigo")
+    CursoEntity findByCodigo(@Param("codigo")  String codigo);
 }
