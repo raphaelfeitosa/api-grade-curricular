@@ -1,5 +1,6 @@
 package com.cliente.escola.gradecurricular.services;
 
+import com.cliente.escola.gradecurricular.constant.HyperLinkConstant;
 import com.cliente.escola.gradecurricular.constant.MensagensConstant;
 import com.cliente.escola.gradecurricular.controllers.MateriaController;
 import com.cliente.escola.gradecurricular.dto.MateriaDto;
@@ -43,7 +44,7 @@ public class MateriaService implements IMateriaService {
                         HttpStatus.BAD_REQUEST);
             }
             return this.cadastrarOuAtualizar(materiaDto);
-        }catch (MateriaException materiaException){
+        } catch (MateriaException materiaException) {
             throw materiaException;
         } catch (Exception exception) {
             throw new MateriaException(MensagensConstant.ERRO_GENERICO.getValor(),
@@ -66,8 +67,16 @@ public class MateriaService implements IMateriaService {
                     }.getType());
             materiaDto.forEach(materiaDtoResponse ->
                     materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                            .consultarMateria(materiaDtoResponse.getId()))
+                                    .consultarMateria(materiaDtoResponse.getId()))
                             .withSelfRel()));
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .atualizarMateria(materiaDtoResponse))
+                            .withRel(HyperLinkConstant.ATUALIZAR.getValor())));
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .excluirMateria(materiaDtoResponse.getId()))
+                            .withRel(HyperLinkConstant.EXCLUIR.getValor())));
             return materiaDto;
 
         } catch (Exception exception) {
@@ -102,8 +111,20 @@ public class MateriaService implements IMateriaService {
                 }.getType());
         materiaDto.forEach(materiaDtoResponse ->
                 materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                        .consultarMateria(materiaDtoResponse.getId()))
+                                .consultarMateria(materiaDtoResponse.getId()))
                         .withSelfRel()));
+        materiaDto.forEach(materiaDtoResponse ->
+                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                .listarMaterias())
+                        .withRel(HyperLinkConstant.LISTAR.getValor())));
+        materiaDto.forEach(materiaDtoResponse ->
+                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                .atualizarMateria(materiaDtoResponse))
+                        .withRel(HyperLinkConstant.ATUALIZAR.getValor())));
+        materiaDto.forEach(materiaDtoResponse ->
+                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                .excluirMateria(materiaDtoResponse.getId()))
+                        .withRel(HyperLinkConstant.EXCLUIR.getValor())));
         return materiaDto;
     }
 
@@ -115,8 +136,20 @@ public class MateriaService implements IMateriaService {
                 }.getType());
         materiaDto.forEach(materiaDtoResponse ->
                 materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                        .consultarMateria(materiaDtoResponse.getId()))
+                                .consultarMateria(materiaDtoResponse.getId()))
                         .withSelfRel()));
+        materiaDto.forEach(materiaDtoResponse ->
+                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                .listarMaterias())
+                        .withRel(HyperLinkConstant.LISTAR.getValor())));
+        materiaDto.forEach(materiaDtoResponse ->
+                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                .atualizarMateria(materiaDtoResponse))
+                        .withRel(HyperLinkConstant.ATUALIZAR.getValor())));
+        materiaDto.forEach(materiaDtoResponse ->
+                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                .excluirMateria(materiaDtoResponse.getId()))
+                        .withRel(HyperLinkConstant.EXCLUIR.getValor())));
         return materiaDto;
     }
 
