@@ -162,7 +162,6 @@ public class CursoService implements ICursoService {
     public GetCursoDto consultarCursoPorId(Long id) {
         try {
             Optional<CursoEntity> cursoEntityOptional = this.iCursoRepository.findById(id);
-            System.out.println(cursoEntityOptional.get());
             if (cursoEntityOptional.isEmpty()) {
                 throw new CursoException(MensagensConstant.ERRO_CURSO_NAO_ENCONTRADO.getValor(),
                         HttpStatus.NOT_FOUND);
