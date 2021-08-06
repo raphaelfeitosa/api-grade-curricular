@@ -17,13 +17,7 @@ public class GradeCurricularApplication extends SpringBootServletInitializer {
         return application.sources(GradeCurricularApplication.class);
     }
 
-    @Bean
-    public ModelMapper modelMapper(){
-        return new ModelMapper();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(GradeCurricularApplication.class, args);
     }
-
 }
