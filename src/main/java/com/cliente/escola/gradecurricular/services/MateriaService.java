@@ -27,8 +27,8 @@ public class MateriaService implements IMateriaService {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public MateriaService(IMateriaRepository iMateriaRepository, ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public MateriaService(IMateriaRepository iMateriaRepository) {
+        this.modelMapper = new ModelMapper();
         this.iMateriaRepository = iMateriaRepository;
     }
 
@@ -106,51 +106,62 @@ public class MateriaService implements IMateriaService {
     @CachePut(unless = "#result.size()<3")
     @Override
     public List<MateriaDto> listarMateriasPorHorarioMinimo(int horaMinima) {
-        List<MateriaDto> materiaDto = this.modelMapper.map(iMateriaRepository.findByHorarioMinimo(horaMinima),
-                new TypeToken<List<MateriaDto>>() {
-                }.getType());
-        materiaDto.forEach(materiaDtoResponse ->
-                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                                .consultarMateria(materiaDtoResponse.getId()))
-                        .withSelfRel()));
-        materiaDto.forEach(materiaDtoResponse ->
-                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                                .listarMaterias())
-                        .withRel(HyperLinkConstant.LISTAR.getValor())));
-        materiaDto.forEach(materiaDtoResponse ->
-                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                                .atualizarMateria(materiaDtoResponse))
-                        .withRel(HyperLinkConstant.ATUALIZAR.getValor())));
-        materiaDto.forEach(materiaDtoResponse ->
-                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                                .excluirMateria(materiaDtoResponse.getId()))
-                        .withRel(HyperLinkConstant.EXCLUIR.getValor())));
-        return materiaDto;
+
+        try {
+            List<MateriaDto> materiaDto = this.modelMapper.map(iMateriaRepository.findByHorarioMinimo(horaMinima),
+                    new TypeToken<List<MateriaDto>>() {
+                    }.getType());
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .consultarMateria(materiaDtoResponse.getId()))
+                            .withSelfRel()));
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .listarMaterias())
+                            .withRel(HyperLinkConstant.LISTAR.getValor())));
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .atualizarMateria(materiaDtoResponse))
+                            .withRel(HyperLinkConstant.ATUALIZAR.getValor())));
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .excluirMateria(materiaDtoResponse.getId()))
+                            .withRel(HyperLinkConstant.EXCLUIR.getValor())));
+            return materiaDto;
+        } catch (Exception exception) {
+            throw new MateriaException(MensagensConstant.ERRO_GENERICO.getValor(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @CachePut(unless = "#result.size()<3")
     @Override
     public List<MateriaDto> listarMateriasPorFrequencia(int frequencia) {
-        List<MateriaDto> materiaDto = this.modelMapper.map(iMateriaRepository.findByFrequencia(frequencia),
-                new TypeToken<List<MateriaDto>>() {
-                }.getType());
-        materiaDto.forEach(materiaDtoResponse ->
-                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                                .consultarMateria(materiaDtoResponse.getId()))
-                        .withSelfRel()));
-        materiaDto.forEach(materiaDtoResponse ->
-                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                                .listarMaterias())
-                        .withRel(HyperLinkConstant.LISTAR.getValor())));
-        materiaDto.forEach(materiaDtoResponse ->
-                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                                .atualizarMateria(materiaDtoResponse))
-                        .withRel(HyperLinkConstant.ATUALIZAR.getValor())));
-        materiaDto.forEach(materiaDtoResponse ->
-                materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
-                                .excluirMateria(materiaDtoResponse.getId()))
-                        .withRel(HyperLinkConstant.EXCLUIR.getValor())));
-        return materiaDto;
+        try {
+            List<MateriaDto> materiaDto = this.modelMapper.map(iMateriaRepository.findByFrequencia(frequencia),
+                    new TypeToken<List<MateriaDto>>() {
+                    }.getType());
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .consultarMateria(materiaDtoResponse.getId()))
+                            .withSelfRel()));
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .listarMaterias())
+                            .withRel(HyperLinkConstant.LISTAR.getValor())));
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .atualizarMateria(materiaDtoResponse))
+                            .withRel(HyperLinkConstant.ATUALIZAR.getValor())));
+            materiaDto.forEach(materiaDtoResponse ->
+                    materiaDtoResponse.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class)
+                                    .excluirMateria(materiaDtoResponse.getId()))
+                            .withRel(HyperLinkConstant.EXCLUIR.getValor())));
+            return materiaDto;
+        } catch (Exception exception) {
+            throw new MateriaException(MensagensConstant.ERRO_GENERICO.getValor(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
