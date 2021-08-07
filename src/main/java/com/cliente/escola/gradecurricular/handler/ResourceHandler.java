@@ -39,10 +39,10 @@ public class ResourceHandler {
     }
 
     @ExceptionHandler(CursoException.class)
-    public ResponseEntity<Response<String>> handlerCursoException(CursoException m) {
+    public ResponseEntity<Response<String>> handlerCursoException(CursoException cursoException) {
         Response<String> response = new Response<>();
-        response.setStatusCode(m.getHttpStatus().value());
-        response.setData(m.getMessage());
-        return ResponseEntity.status(m.getHttpStatus()).body(response);
+        response.setStatusCode(cursoException.getHttpStatus().value());
+        response.setData(cursoException.getMessage());
+        return ResponseEntity.status(cursoException.getHttpStatus()).body(response);
     }
 }
