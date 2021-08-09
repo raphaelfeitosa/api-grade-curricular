@@ -55,7 +55,10 @@ public class MateriaControllerUnitTest {
     @Test
     @DisplayName("Teste para listar materias")
     void testListarMaterias() {
-        Mockito.when(this.iMateriaService.listarMaterias()).thenReturn(new ArrayList<MateriaDto>());
+        List<MateriaDto> listMaterias = new ArrayList<>();
+        listMaterias.add(materiaDto);
+
+        Mockito.when(this.iMateriaService.listarMaterias()).thenReturn(listMaterias);
         ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange(
                 this.montarUri(""), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {
