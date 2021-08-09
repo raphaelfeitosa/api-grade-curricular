@@ -30,7 +30,7 @@ public class CursoEntity implements Serializable {
     @Column(name = "codigo")
     private String codigo;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "tb_curso_materia",
             joinColumns = @JoinColumn(name = "curso_id"),
             inverseJoinColumns = @JoinColumn(name = "materia_id"))
