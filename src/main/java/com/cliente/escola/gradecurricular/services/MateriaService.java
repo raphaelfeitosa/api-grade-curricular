@@ -106,7 +106,6 @@ public class MateriaService implements IMateriaService {
     @CachePut(unless = "#result.size()<3")
     @Override
     public List<MateriaDto> listarMateriasPorHorarioMinimo(int horaMinima) {
-
         try {
             List<MateriaDto> materiaDto = this.modelMapper.map(iMateriaRepository.findByHorarioMinimo(horaMinima),
                     new TypeToken<List<MateriaDto>>() {
@@ -167,6 +166,10 @@ public class MateriaService implements IMateriaService {
     @Override
     public Boolean atualizarMateria(MateriaDto materiaDto) {
         try {
+            if (materiaDto.getId() == null) {
+                throw new MateriaException(MensagensConstant.ERRO_ID_NAO_INFORMADO.getValor(),
+                        HttpStatus.BAD_REQUEST);
+            }
             this.consultarMateria(materiaDto.getId());
             return this.cadastrarOuAtualizar(materiaDto);
         } catch (MateriaException materiaException) {
