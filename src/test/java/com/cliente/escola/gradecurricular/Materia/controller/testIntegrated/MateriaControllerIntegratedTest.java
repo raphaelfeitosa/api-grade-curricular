@@ -71,7 +71,7 @@ class MateriaControllerIntegratedTest {
     @Test
     @DisplayName("Teste para listar materias")
     void testListarMaterias() {
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange(
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri(""), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {
                 });
@@ -83,7 +83,7 @@ class MateriaControllerIntegratedTest {
     @Test
     @DisplayName("Teste para retornar uma lista de materias com horario minimo")
     void testlistarMateriasPorHoraMinima() {
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange(
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri("/horario-minimo/80"), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {
                 });
@@ -95,7 +95,7 @@ class MateriaControllerIntegratedTest {
     @Test
     @DisplayName("Teste para retornar uma lista de materias por frequencia")
     void testlistarMateriasPorFrequencia() {
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange(
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri("/frequencia/1"), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {
                 });
@@ -109,7 +109,7 @@ class MateriaControllerIntegratedTest {
     void testConsultarMateriaPorId() {
         List<MateriaEntity> materiaEntityList = this.iMateriaRepository.findAll();
         Long id = materiaEntityList.get(0).getId();
-        ResponseEntity<Response<MateriaDto>> materias = restTemplate.exchange(
+        ResponseEntity<Response<MateriaDto>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri(Long.toString(id)), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<MateriaDto>>() {
                 });
@@ -130,7 +130,7 @@ class MateriaControllerIntegratedTest {
         materiaEntity4.setNome("CALCULO I");
 
         HttpEntity<MateriaEntity> request = new HttpEntity<>(materiaEntity4);
-        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange(
+        ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 "http://localhost:" + this.port + "/materias/", HttpMethod.POST, request,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });
@@ -147,7 +147,7 @@ class MateriaControllerIntegratedTest {
         MateriaEntity materiaEntity = materiaEntityList.get(0);
         materiaEntity.setNome("Teste Atualiza Materia");
         HttpEntity<MateriaEntity> request = new HttpEntity<>(materiaEntity);
-        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange(
+        ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 "http://localhost:" + this.port + "/materias/", HttpMethod.PUT, request,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });
@@ -162,7 +162,7 @@ class MateriaControllerIntegratedTest {
     void testExluirMateriaPorId() {
         List<MateriaEntity> materiaEntityList = this.iMateriaRepository.findAll();
         Long id = materiaEntityList.get(0).getId();
-        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange(
+        ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 "http://localhost:" + this.port + "/materias/" + id, HttpMethod.DELETE, null,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });

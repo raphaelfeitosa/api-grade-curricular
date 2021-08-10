@@ -59,7 +59,7 @@ public class MateriaControllerUnitTest {
         listMaterias.add(materiaDto);
 
         Mockito.when(this.iMateriaService.listarMaterias()).thenReturn(listMaterias);
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange(
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri(""), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {
                 });
@@ -71,7 +71,7 @@ public class MateriaControllerUnitTest {
     @DisplayName("Teste para consultar uma materia")
     void testConsultarMaterias() {
         Mockito.when(this.iMateriaService.consultarMateria(1L)).thenReturn(materiaDto);
-        ResponseEntity<Response<MateriaDto>> materias = restTemplate.exchange(
+        ResponseEntity<Response<MateriaDto>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri("/1"), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<MateriaDto>>() {
                 });
@@ -84,7 +84,7 @@ public class MateriaControllerUnitTest {
     void testCadastrarMaterias() {
         Mockito.when(this.iMateriaService.cadastrarMateria(materiaDto)).thenReturn(Boolean.TRUE);
         HttpEntity<MateriaDto> request = new HttpEntity<>(materiaDto);
-        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange(
+        ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri(""), HttpMethod.POST, request,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });
@@ -97,7 +97,7 @@ public class MateriaControllerUnitTest {
     void testAtualizarMaterias() {
         Mockito.when(this.iMateriaService.atualizarMateria(materiaDto)).thenReturn(Boolean.TRUE);
         HttpEntity<MateriaDto> request = new HttpEntity<>(materiaDto);
-        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange(
+        ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri(""), HttpMethod.PUT, request,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });
@@ -109,7 +109,7 @@ public class MateriaControllerUnitTest {
     @DisplayName("Teste para excluir uma materia")
     void testExcluirMaterias() {
         Mockito.when(this.iMateriaService.excluirMateria(1L)).thenReturn(Boolean.TRUE);
-        ResponseEntity<Response<Boolean>> materias = restTemplate.exchange(
+        ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri("/1"), HttpMethod.DELETE, null,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });
@@ -121,7 +121,7 @@ public class MateriaControllerUnitTest {
     @DisplayName("Teste para retornar uma lista de materias com horario minimo")
     void testlistarMateriasPorHoraMinima() {
         Mockito.when(this.iMateriaService.listarMateriasPorHorarioMinimo(64)).thenReturn((new ArrayList<MateriaDto>()));
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange(
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri("/horario-minimo/64"), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {
                 });
@@ -133,7 +133,7 @@ public class MateriaControllerUnitTest {
     @DisplayName("Teste para retornar uma lista de materias por frequencia")
     void testlistarMateriasPorFrequencia() {
         Mockito.when(this.iMateriaService.listarMateriasPorFrequencia(1)).thenReturn((new ArrayList<MateriaDto>()));
-        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.exchange(
+        ResponseEntity<Response<List<MateriaDto>>> materias = restTemplate.withBasicAuth("root", "root").exchange(
                 this.montarUri("/frequencia/1"), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<List<MateriaDto>>>() {
                 });
