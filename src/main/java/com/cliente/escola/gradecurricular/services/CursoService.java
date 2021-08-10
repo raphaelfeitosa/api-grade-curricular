@@ -8,7 +8,6 @@ import com.cliente.escola.gradecurricular.dto.GetCursoDto;
 import com.cliente.escola.gradecurricular.entities.CursoEntity;
 import com.cliente.escola.gradecurricular.entities.MateriaEntity;
 import com.cliente.escola.gradecurricular.exceptions.CursoException;
-import com.cliente.escola.gradecurricular.exceptions.MateriaException;
 import com.cliente.escola.gradecurricular.repositories.ICursoRepository;
 import com.cliente.escola.gradecurricular.repositories.IMateriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class CursoService implements ICursoService {
                 throw new CursoException(MensagensConstant.ERRO_MATERIA_NULL.getValor(),
                         HttpStatus.BAD_REQUEST);
             }
-            if (this.iCursoRepository.findByCodigo(cursoDto.getCodigo()) != null) {
+            if (this.iCursoRepository.findByCodigo(cursoDto.getCodigo().toLowerCase()) != null) {
                 throw new CursoException(MensagensConstant.ERRO_CURSO_CADASTRADO_ANTERIORMENTE.getValor(),
                         HttpStatus.BAD_REQUEST);
             }
@@ -61,7 +60,7 @@ public class CursoService implements ICursoService {
 
     private Boolean cadastrarOuAtualizarCurso(CursoDto cursoDto) {
         List<MateriaEntity> listMateriaEntity = new ArrayList<>();
-        if (!cursoDto.getMaterias().isEmpty() && cursoDto.getMaterias() !=null) {
+        if (!cursoDto.getMaterias().isEmpty() && cursoDto.getMaterias() != null) {
             cursoDto.getMaterias().forEach(materia -> {
                 if (this.iMateriaRepository.findById(materia).isPresent()) {
                     listMateriaEntity.add(this.iMateriaRepository.findById(materia).get());
@@ -109,7 +108,7 @@ public class CursoService implements ICursoService {
     @Override
     public GetCursoDto consultarCursoPorCodigo(String codigo) {
         try {
-            CursoEntity cursoEntity = this.iCursoRepository.findByCodigo(codigo);
+            CursoEntity cursoEntity = this.iCursoRepository.findByCodigo(codigo.toLowerCase());
             if (cursoEntity == null) {
                 throw new CursoException(MensagensConstant.ERRO_CURSO_NAO_ENCONTRADO.getValor(),
                         HttpStatus.NOT_FOUND);
