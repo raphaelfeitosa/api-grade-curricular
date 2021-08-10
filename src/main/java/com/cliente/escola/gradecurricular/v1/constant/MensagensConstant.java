@@ -1,4 +1,4 @@
-package com.cliente.escola.gradecurricular.constant;
+package com.cliente.escola.gradecurricular.v1.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

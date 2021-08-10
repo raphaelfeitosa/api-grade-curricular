@@ -1,4 +1,4 @@
-package com.cliente.escola.gradecurricular.dto;
+package com.cliente.escola.gradecurricular.v1.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

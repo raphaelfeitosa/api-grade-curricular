@@ -1,6 +1,6 @@
-package com.cliente.escola.gradecurricular.services;
+package com.cliente.escola.gradecurricular.v1.services;
 
-import com.cliente.escola.gradecurricular.dto.MateriaDto;
+import com.cliente.escola.gradecurricular.v1.dto.MateriaDto;
 
 import java.util.List;
 

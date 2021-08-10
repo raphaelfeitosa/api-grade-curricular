@@ -1,13 +1,13 @@
-package com.cliente.escola.gradecurricular.services;
+package com.cliente.escola.gradecurricular.v1.services;
 
-import com.cliente.escola.gradecurricular.constant.HyperLinkConstant;
-import com.cliente.escola.gradecurricular.constant.MensagensConstant;
-import com.cliente.escola.gradecurricular.controllers.CursoController;
-import com.cliente.escola.gradecurricular.dto.CursoDto;
-import com.cliente.escola.gradecurricular.dto.GetCursoDto;
+import com.cliente.escola.gradecurricular.v1.constant.HyperLinkConstant;
+import com.cliente.escola.gradecurricular.v1.constant.MensagensConstant;
+import com.cliente.escola.gradecurricular.v1.controllers.CursoController;
+import com.cliente.escola.gradecurricular.v1.dto.CursoDto;
+import com.cliente.escola.gradecurricular.v1.dto.GetCursoDto;
 import com.cliente.escola.gradecurricular.entities.CursoEntity;
 import com.cliente.escola.gradecurricular.entities.MateriaEntity;
-import com.cliente.escola.gradecurricular.exceptions.CursoException;
+import com.cliente.escola.gradecurricular.v1.exceptions.CursoException;
 import com.cliente.escola.gradecurricular.repositories.ICursoRepository;
 import com.cliente.escola.gradecurricular.repositories.IMateriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

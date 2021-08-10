@@ -1,7 +1,7 @@
-package com.cliente.escola.gradecurricular.services;
+package com.cliente.escola.gradecurricular.v1.services;
 
-import com.cliente.escola.gradecurricular.dto.CursoDto;
-import com.cliente.escola.gradecurricular.dto.GetCursoDto;
+import com.cliente.escola.gradecurricular.v1.dto.CursoDto;
+import com.cliente.escola.gradecurricular.v1.dto.GetCursoDto;
 
 import java.util.List;
 

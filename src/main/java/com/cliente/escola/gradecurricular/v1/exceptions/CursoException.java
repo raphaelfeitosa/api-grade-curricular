@@ -1,4 +1,4 @@
-package com.cliente.escola.gradecurricular.exceptions;
+package com.cliente.escola.gradecurricular.v1.exceptions;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

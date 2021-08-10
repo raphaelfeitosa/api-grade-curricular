@@ -1,8 +1,8 @@
-package com.cliente.escola.gradecurricular.handler;
+package com.cliente.escola.gradecurricular.v1.handler;
 
-import com.cliente.escola.gradecurricular.exceptions.CursoException;
-import com.cliente.escola.gradecurricular.exceptions.MateriaException;
-import com.cliente.escola.gradecurricular.models.Response;
+import com.cliente.escola.gradecurricular.v1.exceptions.CursoException;
+import com.cliente.escola.gradecurricular.v1.exceptions.MateriaException;
+import com.cliente.escola.gradecurricular.v1.models.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

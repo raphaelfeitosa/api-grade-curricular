@@ -1,11 +1,11 @@
-package com.cliente.escola.gradecurricular.services;
+package com.cliente.escola.gradecurricular.v1.services;
 
-import com.cliente.escola.gradecurricular.constant.HyperLinkConstant;
-import com.cliente.escola.gradecurricular.constant.MensagensConstant;
-import com.cliente.escola.gradecurricular.controllers.MateriaController;
-import com.cliente.escola.gradecurricular.dto.MateriaDto;
+import com.cliente.escola.gradecurricular.v1.constant.HyperLinkConstant;
+import com.cliente.escola.gradecurricular.v1.constant.MensagensConstant;
+import com.cliente.escola.gradecurricular.v1.controllers.MateriaController;
+import com.cliente.escola.gradecurricular.v1.dto.MateriaDto;
 import com.cliente.escola.gradecurricular.entities.MateriaEntity;
-import com.cliente.escola.gradecurricular.exceptions.MateriaException;
+import com.cliente.escola.gradecurricular.v1.exceptions.MateriaException;
 import com.cliente.escola.gradecurricular.repositories.IMateriaRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

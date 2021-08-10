@@ -29,8 +29,9 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     public Docket gradeCurricularApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
+                .groupName("v1")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.cliente.escola.gradecurricular"))
+                .apis(RequestHandlerSelectors.basePackage("com.cliente.escola.gradecurricular.v1"))
                 .build()
                 .apiInfo(this.metaData())
                 .tags(new Tag(CURSO, "Operações referentes a manipulação de entidade Curso."))

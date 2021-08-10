@@ -1,9 +1,9 @@
 package com.cliente.escola.gradecurricular.Materia.service;
 
-import com.cliente.escola.gradecurricular.dto.MateriaDto;
+import com.cliente.escola.gradecurricular.v1.dto.MateriaDto;
 import com.cliente.escola.gradecurricular.entities.MateriaEntity;
 import com.cliente.escola.gradecurricular.repositories.IMateriaRepository;
-import com.cliente.escola.gradecurricular.services.MateriaService;
+import com.cliente.escola.gradecurricular.v1.services.MateriaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -50,7 +50,7 @@ public class MateriaServiceSuccessUnitTest {
         Assertions.assertNotNull(listMateriaDto);
         Assertions.assertEquals("ILP", listMateriaDto.get(0).getCodigo());
         Assertions.assertEquals(1, listMateriaDto.get(0).getId());
-        Assertions.assertEquals("/materias/1", listMateriaDto.get(0).getLinks().getRequiredLink("self").getHref());
+        Assertions.assertEquals("/v1/materias/1", listMateriaDto.get(0).getLinks().getRequiredLink("self").getHref());
         Assertions.assertEquals(1, listMateriaDto.size());
 
         Mockito.verify(this.materiaRepository, Mockito.times(1)).findAll();
@@ -68,7 +68,7 @@ public class MateriaServiceSuccessUnitTest {
         Assertions.assertNotNull(listMateriaDto);
         Assertions.assertEquals("ILP", listMateriaDto.get(0).getCodigo());
         Assertions.assertEquals(1, listMateriaDto.get(0).getId());
-        Assertions.assertEquals("/materias/1", (listMateriaDto.get(0).getLinks().getRequiredLink("self").getHref()));
+        Assertions.assertEquals("/v1/materias/1", (listMateriaDto.get(0).getLinks().getRequiredLink("self").getHref()));
         Assertions.assertEquals(1, listMateriaDto.size());
 
         Mockito.verify(this.materiaRepository, Mockito.times(1)).findByHorarioMinimo(64);
@@ -86,7 +86,7 @@ public class MateriaServiceSuccessUnitTest {
         Assertions.assertNotNull(listMateriaDto);
         Assertions.assertEquals("ILP", listMateriaDto.get(0).getCodigo());
         Assertions.assertEquals(1, listMateriaDto.get(0).getId());
-        Assertions.assertEquals("/materias/1", (listMateriaDto.get(0).getLinks().getRequiredLink("self").getHref()));
+        Assertions.assertEquals("/v1/materias/1", (listMateriaDto.get(0).getLinks().getRequiredLink("self").getHref()));
         Assertions.assertEquals(1, listMateriaDto.size());
 
         Mockito.verify(this.materiaRepository, Mockito.times(1)).findByFrequencia(1);

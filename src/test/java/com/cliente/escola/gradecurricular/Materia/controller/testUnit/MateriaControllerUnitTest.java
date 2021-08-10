@@ -1,8 +1,8 @@
 package com.cliente.escola.gradecurricular.Materia.controller.testUnit;
 
-import com.cliente.escola.gradecurricular.dto.MateriaDto;
-import com.cliente.escola.gradecurricular.models.Response;
-import com.cliente.escola.gradecurricular.services.IMateriaService;
+import com.cliente.escola.gradecurricular.v1.dto.MateriaDto;
+import com.cliente.escola.gradecurricular.v1.models.Response;
+import com.cliente.escola.gradecurricular.v1.services.IMateriaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -49,7 +49,7 @@ public class MateriaControllerUnitTest {
     }
 
     private String montarUri(String urn) {
-        return "http://localhost:" + this.port + "/materias" + urn;
+        return "http://localhost:" + this.port + "/v1/materias" + urn;
     }
 
     @Test

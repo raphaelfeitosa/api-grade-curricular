@@ -1,11 +1,11 @@
-package com.cliente.escola.gradecurricular.controllers;
+package com.cliente.escola.gradecurricular.v1.controllers;
 
 import com.cliente.escola.gradecurricular.config.SwaggerConfig;
-import com.cliente.escola.gradecurricular.constant.HyperLinkConstant;
-import com.cliente.escola.gradecurricular.dto.CursoDto;
-import com.cliente.escola.gradecurricular.dto.GetCursoDto;
-import com.cliente.escola.gradecurricular.models.Response;
-import com.cliente.escola.gradecurricular.services.ICursoService;
+import com.cliente.escola.gradecurricular.v1.constant.HyperLinkConstant;
+import com.cliente.escola.gradecurricular.v1.dto.CursoDto;
+import com.cliente.escola.gradecurricular.v1.dto.GetCursoDto;
+import com.cliente.escola.gradecurricular.v1.models.Response;
+import com.cliente.escola.gradecurricular.v1.services.ICursoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @Api(tags = SwaggerConfig.CURSO)
 @RestController
-@RequestMapping("/cursos")
+@RequestMapping("/v1/cursos")
 public class CursoController {
 
     @Autowired

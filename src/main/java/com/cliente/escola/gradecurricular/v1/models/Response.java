@@ -1,4 +1,4 @@
-package com.cliente.escola.gradecurricular.models;
+package com.cliente.escola.gradecurricular.v1.models;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

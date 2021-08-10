@@ -1,9 +1,9 @@
 package com.cliente.escola.gradecurricular.Materia.controller.testIntegrated;
 
-import com.cliente.escola.gradecurricular.dto.MateriaDto;
 import com.cliente.escola.gradecurricular.entities.MateriaEntity;
-import com.cliente.escola.gradecurricular.models.Response;
 import com.cliente.escola.gradecurricular.repositories.IMateriaRepository;
+import com.cliente.escola.gradecurricular.v1.dto.MateriaDto;
+import com.cliente.escola.gradecurricular.v1.models.Response;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ class MateriaControllerIntegratedTest {
     }
 
     private String montarUri(String urn) {
-        return "http://localhost:" + this.port + "/materias/" + urn;
+        return "http://localhost:" + this.port + "/v1/materias" + urn;
     }
 
     private void montarBaseDeDados() {
@@ -110,7 +110,7 @@ class MateriaControllerIntegratedTest {
         List<MateriaEntity> materiaEntityList = this.iMateriaRepository.findAll();
         Long id = materiaEntityList.get(0).getId();
         ResponseEntity<Response<MateriaDto>> materias = restTemplate.withBasicAuth("root", "root").exchange(
-                this.montarUri(Long.toString(id)), HttpMethod.GET, null,
+                this.montarUri("/" + Long.toString(id)), HttpMethod.GET, null,
                 new ParameterizedTypeReference<Response<MateriaDto>>() {
                 });
         Assertions.assertNotNull(materias.getBody().getData());
@@ -131,7 +131,7 @@ class MateriaControllerIntegratedTest {
 
         HttpEntity<MateriaEntity> request = new HttpEntity<>(materiaEntity4);
         ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
-                "http://localhost:" + this.port + "/materias/", HttpMethod.POST, request,
+                this.montarUri(""), HttpMethod.POST, request,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });
         List<MateriaEntity> listMateriaEntityCadastrada = this.iMateriaRepository.findAll();
@@ -148,7 +148,7 @@ class MateriaControllerIntegratedTest {
         materiaEntity.setNome("Teste Atualiza Materia");
         HttpEntity<MateriaEntity> request = new HttpEntity<>(materiaEntity);
         ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
-                "http://localhost:" + this.port + "/materias/", HttpMethod.PUT, request,
+                this.montarUri(""), HttpMethod.PUT, request,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });
         MateriaEntity materiaEntityAtualizada = this.iMateriaRepository.findById(materiaEntity.getId()).get();
@@ -163,7 +163,7 @@ class MateriaControllerIntegratedTest {
         List<MateriaEntity> materiaEntityList = this.iMateriaRepository.findAll();
         Long id = materiaEntityList.get(0).getId();
         ResponseEntity<Response<Boolean>> materias = restTemplate.withBasicAuth("root", "root").exchange(
-                "http://localhost:" + this.port + "/materias/" + id, HttpMethod.DELETE, null,
+                this.montarUri("/" + id), HttpMethod.DELETE, null,
                 new ParameterizedTypeReference<Response<Boolean>>() {
                 });
 
