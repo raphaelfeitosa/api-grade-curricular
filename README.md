@@ -244,9 +244,9 @@ As seguintes tecnologias foram usadas na construção do projeto:
   "statusCode": 200,
   "data": {
     "id": 1,
-    "nome": "Teste de materia",
+    "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
     "horas": 65,
-    "codigo": "TSDSss",
+    "codigo": "POO",
     "frequencia": 1
   },
   "timeStamp": 1628736338954,
@@ -278,10 +278,10 @@ As seguintes tecnologias foram usadas na construção do projeto:
 ```json
 {
   "id": 1,
-  "nome": "Calculo B",
-  "horas": 40,
-  "codigo": "ILT4564",
-  "frequencia": 1
+  "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+  "horas": 70,
+  "codigo": "POO",
+  "frequencia": 2
 }
 ```
 **Response**
@@ -336,10 +336,9 @@ As seguintes tecnologias foram usadas na construção do projeto:
 }
 ```
 
-## :mag_right: Swagger:
+## Documentação da API com Swagger:
 
-http://localhost:8081/v1/swagger-ui.html`
-
+`http://localhost:8081/v1/swagger-ui.html`
 
 ## 🦸 Autor
 
