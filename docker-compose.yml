@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  grade-curricular-api:
+    build:
+      dockerfile: dockerfile
+      context: .
+    image: raphael/grade-curricular-api:1.0.0
+    restart: on-failure
+    container_name: grade-curricular-api
+    ports:
+      - 8081:8081
+    networks:
+      - grade-curricular-api
+    depends_on:
+      - grade_curricular_db
+
+  grade_curricular_db:
+    image: postgres
+    restart: always
+    container_name: grade_curricular_db
+    ports:
+      - 5432:5432
+    networks:
+      - grade-curricular-api
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=grade_curricular_db
+    volumes:
+      - pg_data:/var/lib/postgres/data
+
+networks:
+  grade-curricular-api:
+    driver: bridge
+
+volumes:
+  pg_data:
+    driver: local
