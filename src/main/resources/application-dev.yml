@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: grade-curricular
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://grade_curricular_db:5432/grade_curricular_db?createDatabaseIfNotExist=true&useSSL=false
+    username: root
+    password: password
+
+
