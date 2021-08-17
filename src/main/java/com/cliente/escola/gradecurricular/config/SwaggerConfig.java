@@ -31,7 +31,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .useDefaultResponseMessages(false)
                 .groupName("v1")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.cliente.escola.gradecurricular.v1"))
+                .apis(RequestHandlerSelectors.basePackage("com.cliente.escola.gradecurricular.v1.controllers"))
                 .build()
                 .apiInfo(this.metaData())
                 .tags(new Tag(CURSO, "Operações referentes a manipulação de entidade Curso."))
@@ -56,7 +56,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
+        registry.addResourceHandler("/swagger-ui.html")
                 .addResourceLocations("classpath:META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:META-INF/resources/webjars/");
