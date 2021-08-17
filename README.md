@@ -7,7 +7,7 @@ API responsável pela manutenção curricular
 - [Executando o projeto com Docker](https://github.com/raphaelfeitosa/microservice-grade-curricular#executando-o-projeto-com-docker)
 - [Executando o projeto localmente](https://github.com/raphaelfeitosa/microservice-grade-curricular#executando-o-projeto-localmente)
 - [Tecnologias](https://github.com/raphaelfeitosa/microservice-grade-curricular#tecnologias)
-- [Endpoints disponíveis](https://github.com/raphaelfeitosa/microservice-grade-curricular#endpoints-disponíveis)
+- [Recursos](https://github.com/raphaelfeitosa/microservice-grade-curricular#recursos-da-api-v1)
 - [Swagger](https://github.com/raphaelfeitosa/microservice-grade-curricular#swagger)
 - [Contribuir](https://github.com/raphaelfeitosa/microservice-grade-curricular#como-contribuir-para-o-projeto)
 - [Autor](https://github.com/raphaelfeitosa/microservice-grade-curricular#autor)
@@ -75,7 +75,7 @@ As seguintes tecnologias foram usadas na construção do projeto:
 - **[HATEOAS](https://spring.io/projects/spring-hateoas)**
 - **[Modelmapper](http://modelmapper.org/)**
 
-## Resources api (v1):
+## Recursos da API v1
 Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - ### Rescurso [/materias], Methods: GET, POST, PUT, DELETE
