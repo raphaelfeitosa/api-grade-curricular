@@ -34,8 +34,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .apis(RequestHandlerSelectors.basePackage("com.cliente.escola.gradecurricular.v1.controllers"))
                 .build()
                 .apiInfo(this.metaData())
-                .tags(new Tag(CURSO, "Operações referentes a manipulação de entidade Curso."))
-                .tags(new Tag(MATERIA, "Operações referentes a manipulação de entidade Materia."));
+                .tags(new Tag(MATERIA, "Operações referentes a manipulação de entidade Materia."))
+                .tags(new Tag(CURSO, "Operações referentes a manipulação de entidade Curso."));
     }
 
     @Bean
