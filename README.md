@@ -4,12 +4,13 @@ API responsável pela manutenção curricular
 ## :speech_balloon: O que há neste documento
 
 - [Executando todos os testes](https://github.com/raphaelfeitosa/microservice-grade-curricular#executando-todos-os-testes)
-- [Executando o projeto com Docker](https://github.com/raphaelfeitosa/microservice-grade-curricular#whaleexecutando-o-projeto-com-docker)
-- [Executando o projeto localmente](https://github.com/raphaelfeitosa/microservice-grade-curricular#computerexecutando-o-projeto-localmente)
-- [Tecnologias](https://github.com/raphaelfeitosa/microservice-grade-curricular#mag_righttecnologias)
-- [Endpoints disponíveis](https://github.com/raphaelfeitosa/microservice-grade-curricular#mag_rightendpoints-disponíveis)
-- [Swagger](https://github.com/raphaelfeitosa/microservice-grade-curricular#mag_rightendpoints-disponíveis)
-- [Autor](https://github.com/raphaelfeitosa/microservice-grade-curricular#mag_rightautor)
+- [Executando o projeto com Docker](https://github.com/raphaelfeitosa/microservice-grade-curricular#executando-o-projeto-com-docker)
+- [Executando o projeto localmente](https://github.com/raphaelfeitosa/microservice-grade-curricular#executando-o-projeto-localmente)
+- [Tecnologias](https://github.com/raphaelfeitosa/microservice-grade-curricular#tecnologias)
+- [Endpoints disponíveis](https://github.com/raphaelfeitosa/microservice-grade-curricular#endpoints-disponíveis)
+- [Swagger](https://github.com/raphaelfeitosa/microservice-grade-curricular#swagger)
+- [Contribuir](https://github.com/raphaelfeitosa/microservice-grade-curricular#como-contribuir-para-o-projeto)
+- [Autor](https://github.com/raphaelfeitosa/microservice-grade-curricular#autor)
 
 
 ## Executando todos os testes
@@ -25,7 +26,7 @@ no Windows
 mvnw.cmd test
 ```
 
-## :whale:Executando o projeto com Docker
+## Executando o projeto com Docker
 
 No terminal, navegue até a pasta raiz do projeto e execute
 
@@ -33,7 +34,7 @@ No terminal, navegue até a pasta raiz do projeto e execute
 docker-compose up --build
 ```
 
-## :computer:Executando o projeto localmente
+## Executando o projeto localmente
 
 Para que não seja necessário instalar nada em sua máquina, a aplicação esta configurada para salvar os dados no banco de dados em mémoria.
 
@@ -61,7 +62,7 @@ no Windows
 mvnw.cmd spring-boot:run
 ```
 
-## :🛠: Tecnologias
+## Tecnologias
 
 As seguintes tecnologias foram usadas na construção do projeto:
 
@@ -74,7 +75,7 @@ As seguintes tecnologias foram usadas na construção do projeto:
 - **[HATEOAS](https://spring.io/projects/spring-hateoas)**
 - **[Modelmapper](http://modelmapper.org/)**
 
-## :mag_right: Resources api (v1):
+## Resources api (v1):
 Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - ### Rescurso [/materias], Methods: GET, POST, PUT, DELETE
@@ -780,7 +781,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-## Documentação da API com Swagger:
+## Swagger
 
 `http://localhost:8081/api/swagger-ui.html`
 
@@ -796,7 +797,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
   <img alt="Vendas" title="#Home" src="https://github.com/raphaelfeitosa/microservice-grade-curricular/blob/main/assets/swagger-curso.png?raw=true"/>
 </p>
 
-## :construction: Como contribuir para o projeto
+## Como contribuir para o projeto
 
 1. Faça um **fork** do projeto.
 2. Crie uma nova branch com as suas alterações: `git checkout -b my-awesome-feature`
@@ -804,7 +805,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 4. Envie as suas alterações: `git push origin my-awesome-feature`
    > Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](https://github.com/firstcontributions/first-contributions)
 
-## 🦸 Autor
+## Autor
 
 <a href="https://github.com/raphaelfeitosa">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/raphaelfeitosa" width="100px;" alt=""/>
