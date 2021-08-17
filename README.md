@@ -784,6 +784,26 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 `http://localhost:8081/api/swagger-ui.html`
 
+### Materia
+
+<p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
+  <img alt="Vendas" title="#Home" src="https://github.com/raphaelfeitosa/microservice-grade-curricular/blob/main/assets/swagger-materia.png?raw=true"/>
+</p>
+
+### Curso
+
+<p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
+  <img alt="Vendas" title="#Home" src="https://github.com/raphaelfeitosa/microservice-grade-curricular/blob/main/assets/swagger-curso.png?raw=true"/>
+</p>
+
+## :construction: Como contribuir para o projeto
+
+1. Faça um **fork** do projeto.
+2. Crie uma nova branch com as suas alterações: `git checkout -b my-awesome-feature`
+3. Salve as alterações e crie uma mensagem de commit contando o que você fez: `git commit -m "feature: My awesome feature"`
+4. Envie as suas alterações: `git push origin my-awesome-feature`
+   > Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](https://github.com/firstcontributions/first-contributions)
+
 ## 🦸 Autor
 
 <a href="https://github.com/raphaelfeitosa">
