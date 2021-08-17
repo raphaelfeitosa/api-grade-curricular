@@ -77,33 +77,33 @@ As seguintes tecnologias foram usadas na construção do projeto:
 ## :mag_right: Resources api (v1):
 Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
-###Rescurso [/materias], Methods: GET, POST, PUT, DELETE
-    ```
-    GET: /materias: para listar todas as materias  
-    GET: /materias/frequencia/{id}: para listar todas as materias pela frequencia 
-    GET: /materias/horario-minimo/{horas}: para listar todas as materias pelo horario minimo
-    GET: /materias/{id}: para listar a materia pelo id
-    POST: /materias: para cadastrar uma materia
-    PUT: /materias: para alterar uma materia
-    DELETE: /materias/{id}: para deletar uma materia 
+- ### Rescurso [/materias], Methods: GET, POST, PUT, DELETE
+  ```
+  GET: /materias: para listar todas as materias  
+  GET: /materias/frequencia/{id}: para listar todas as materias pela frequencia 
+  GET: /materias/horario-minimo/{horas}: para listar todas as materias pelo horario minimo
+  GET: /materias/{id}: para listar a materia pelo id
+  POST: /materias: para cadastrar uma materia
+  PUT: /materias: para alterar uma materia
+  DELETE: /materias/{id}: para deletar uma materia 
   ```
 
-###Rescurso [/cursos], Methods: GET, POST, PUT, DELETE
-    ```
-    GET: /cursos: para listar todos os cursos  
-    GET: /cursos/{id}: para listar o curso pelo id
-    GET: /cursos/codigo-curso?codigo={codigo}: para listar o curso pelo codigo
-    POST: /cursos: para cadastrar um curso
-    PUT: /cursos: para alterar um curso
-    DELETE: /cursos/{id}: para deletar um curso
+- ### Rescurso [/cursos], Methods: GET, POST, PUT, DELETE
+  ```
+  GET: /cursos: para listar todos os cursos  
+  GET: /cursos/{id}: para listar o curso pelo id
+  GET: /cursos/codigo-curso?codigo={codigo}: para listar o curso pelo codigo
+  POST: /cursos: para cadastrar um curso
+  PUT: /cursos: para alterar um curso
+  DELETE: /cursos/{id}: para deletar um curso
   ```
 
-###Autorização para acessar todos os recursos:
+- ### Autorização para acessar todos os recursos:
   ```
   Authorization: Basic Auth [Username: root, Password: root]
   ```
 
-###Responses
+- ### Responses
     | Código | Descrição |
     |---|---|
     | `200` | Requisição executada com sucesso (Success).|
@@ -432,7 +432,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-### excluir materia por id
+### Excluir materia por id
 
 **DELETE** `/materias/{id}` sem *body*:
 
@@ -467,7 +467,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-###CURSOS `http://localhost:8081/api/api/v1`
+### CURSOS `http://localhost:8081/api/api/v1`
 **POST:** `/cursos` com *body*:
 
 - Request (application/json)
@@ -528,7 +528,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-###Obter lista de todos os cursos
+### Obter lista de todos os cursos
 **GET** `/cursos` vai retornar:
 
 - Response 200 (application/json)
@@ -577,7 +577,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
   
 - Response 401 (Unauthorized)
 
-###Consultar curso por id
+### Consultar curso por id
 **GET** `/cursos/{id}` vai retornar:
 
 - Response 200 (application/json)
@@ -629,7 +629,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-###Consultar curso por codigo
+### Consultar curso por codigo
 
 **GET** `/cursos/codigo-curso?codigo={codigo}` vai retornar:
 
@@ -682,7 +682,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-###Alterar curso
+### Alterar curso
 **PUT** `/cursos` com *body*:
 
 - Request (application/json)
@@ -745,7 +745,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-###Excluir curso
+### Excluir curso
 
 **DELETE** `/cursos/{id}` sem *body*:
 
@@ -780,7 +780,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-##Documentação da API com Swagger:
+## Documentação da API com Swagger:
 
 `http://localhost:8081/api/swagger-ui.html`
 
