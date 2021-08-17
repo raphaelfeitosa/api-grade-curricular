@@ -1,5 +1,5 @@
-# microservice-grade-curricular
-Micro-service responsável pela manutenção curricular
+# api-grade-curricular
+API responsável pela manutenção curricular
 
 ## :speech_balloon: O que há neste documento
 
@@ -74,271 +74,715 @@ As seguintes tecnologias foram usadas na construção do projeto:
 - **[HATEOAS](https://spring.io/projects/spring-hateoas)**
 - **[Modelmapper](http://modelmapper.org/)**
 
-## :mag_right: Endpoint disponíveis (v1)
+## :mag_right: Resources api (v1):
+Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
-### MATERIAS `http://localhost:8081/v1`
+- ###Rescurso [/materias], Methods: GET, POST, PUT, DELETE
+    ```
+    GET: /materias: para listar todas as materias  
+    GET: /materias/frequencia/{id}: para listar todas as materias pela frequencia 
+    GET: /materias/horario-minimo/{horas}: para listar todas as materias pelo horario minimo
+    GET: /materias/{id}: para listar a materia pelo id
+    POST: /materias: para cadastrar uma materia
+    PUT: /materias: para alterar uma materia
+    DELETE: /materias/{id}: para deletar uma materia 
+  ```
+
+- ###Rescurso [/cursos], Methods: GET, POST, PUT, DELETE
+    ```
+    GET: /cursos: para listar todos os cursos  
+    GET: /cursos/{id}: para listar o curso pelo id
+    GET: /cursos/codigo-curso?codigo={codigo}: para listar o curso pelo codigo
+    POST: /cursos: para cadastrar um curso
+    PUT: /cursos: para alterar um curso
+    DELETE: /cursos/{id}: para deletar um curso
+  ```
+
+- ###Autorização para acessar todos os recursos:
+  ```
+  Authorization: Basic Auth [Username: root, Password: root]
+  ```
+
+- ###Responses
+    | Código | Descrição |
+    |---|---|
+    | `200` | Requisição executada com sucesso (Success).|
+    | `201` | Requisição cadastrada com sucesso (Success).|
+    | `400` | Erros de validação ou cadastro existente (Bad Request).|
+    | `401` | Dados de acesso inválidos.|
+    | `404` | Registro pesquisado não encontrado (Not Found).|
+
+### MATERIAS
 **POST:** `/materias` com *body*:
 
-```json
-{
-  "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
-  "codigo": "POO",
-  "horas": 65,
-  "frequencia": 1
-}
-```
-
-**Response**
-
-```json
-{
-  "statusCode": 200,
-  "data": true,
-  "timeStamp": 1628736630946,
-  "links": [
+- Request (application/json)
+    ```json
     {
-      "rel": "self",
-      "href": "http://localhost:8081/v1/materias"
-    },
-    {
-      "rel": "UPDATE",
-      "href": "http://localhost:8081/v1/materias"
-    },
-    {
-      "rel": "GET_ALL",
-      "href": "http://localhost:8081/v1/materias"
-    },
-    {
-      "rel": "DELETE",
-      "href": "http://localhost:8081/v1/materias/1"
+      "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+      "codigo": "POO",
+      "horas": 65,
+      "frequencia": 1
     }
-  ]
-}
-```
+    ```
+
+- Response 201 (Created)
+    ```json
+    {
+      "statusCode": 200,
+      "data": true,
+      "timeStamp": 1628736630946,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/materias"
+        },
+        {
+          "rel": "UPDATE",
+          "href": "http://localhost:8081/api/v1/materias"
+        },
+        {
+          "rel": "GET_ALL",
+          "href": "http://localhost:8081/api/v1/materias"
+        }
+      ]
+    }
+    ```
+- Response 400 (Bad Request) - Cadastro existente
+    ```json
+    {
+       "statusCode": 400,
+       "data": "Matéria já possui cadastro.",
+       "timeStamp": 1629227727801,
+       "links": []
+    }
+    ```
+
+- Response 400 (Bad Request) - Erros na validação
+    ```json
+      {
+        "statusCode": 400,
+        "data": {
+            "horas": "Permitido o mínimo de 34 horas por matéria.",
+            "codigo": "Informe o codigo da matéria",
+            "frequencia": "Permitido o máximo de 2 vezes ao ano.",
+            "nome": "Informe o nome da matéria"
+        },
+        "timeStamp": 1629224072902,
+        "links": []
+      }
+    ```
+- Response 401 (Unauthorized)
+
 ### Obter lista de todas as materias
 
 **GET** `/materias` vai retornar:
 
-```json
-{
-  "statusCode": 200,
-  "data": [
+- Response 200 (application/json)
+    ```json
     {
-      "id": 1,
-      "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
-      "horas": 65,
-      "codigo": "POO",
-      "frequencia": 1,
+      "statusCode": 200,
+      "data": [
+        {
+          "id": 1,
+          "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+          "horas": 65,
+          "codigo": "POO",
+          "frequencia": 1,
+          "links": [
+            {
+              "rel": "self",
+              "href": "http://localhost:8081/api/v1/materias/1"
+            },
+            {
+              "rel": "UPDATE",
+              "href": "http://localhost:8081/api/v1/materias"
+            },
+            {
+              "rel": "DELETE",
+              "href": "http://localhost:8081/api/v1/materias/1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "nome": "INTRODUÇÃO A LOGICA DE PROGRAMAÇÃO",
+          "horas": 50,
+          "codigo": "ILP",
+          "frequencia": 1,
+          "links": [
+            {
+              "rel": "self",
+              "href": "http://localhost:8081/api/v1/materias/2"
+            },
+            {
+              "rel": "UPDATE",
+              "href": "http://localhost:8081/api/v1/materias"
+            },
+            {
+              "rel": "DELETE",
+              "href": "http://localhost:8081/api/v1/materias/2"
+            }
+          ]
+        }
+      ],
+      "timeStamp": 1629220947193,
       "links": [
         {
           "rel": "self",
-          "href": "http://localhost:8081/v1/materias/1"
-        },
-        {
-          "rel": "UPDATE",
-          "href": "http://localhost:8081/v1/materias"
-        },
-        {
-          "rel": "DELETE",
-          "href": "http://localhost:8081/v1/materias/1"
+          "href": "http://localhost:8081/api/v1/materias"
         }
       ]
     }
-  ],
-  "timeStamp": 1628735814026,
-  "links": [
-    {
-      "rel": "self",
-      "href": "http://localhost:8081/v1/materias"
-    }
-  ]
-}
-```
+    ```
+
+- Response 401 (Unauthorized)
 
 ### Obter lista de todas as materias por horario minimo
 
 **GET** `/materias/horario-minimo/{horas}` vai retornar:
 
-```json
-{
-  "statusCode": 200,
-  "data": [
+- Response 200 (application/json)
+    ```json
     {
-      "id": 1,
-      "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
-      "horas": 65,
-      "codigo": "POO",
-      "frequencia": 1,
+      "statusCode": 200,
+      "data": [
+        {
+          "id": 1,
+          "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+          "horas": 65,
+          "codigo": "POO",
+          "frequencia": 1,
+          "links": [
+            {
+              "rel": "self",
+              "href": "http://localhost:8081/api/v1/materias/1"
+            },
+            {
+              "rel": "UPDATE",
+              "href": "http://localhost:8081/api/v1/materias"
+            },
+            {
+              "rel": "DELETE",
+              "href": "http://localhost:8081/api/v1/materias/1"
+            }
+          ]
+        }
+      ],
+      "timeStamp": 1628735814026,
       "links": [
         {
           "rel": "self",
-          "href": "http://localhost:8081/v1/materias/1"
-        },
-        {
-          "rel": "UPDATE",
-          "href": "http://localhost:8081/v1/materias"
-        },
-        {
-          "rel": "DELETE",
-          "href": "http://localhost:8081/v1/materias/1"
+          "href": "http://localhost:8081/api/v1/materias"
         }
       ]
     }
-  ],
-  "timeStamp": 1628735814026,
-  "links": [
-    {
-      "rel": "self",
-      "href": "http://localhost:8081/v1/materias"
-    }
-  ]
-}
-```
+    ```
+
+- Response 401 (Unauthorized)
 
 ### Obter lista de todas as materias por frequência
 
 **GET** `/materias/{frequencia}` vai retornar:
 
-```json
-{
-  "statusCode": 200,
-  "data": [
+- Response 200 (application/json)
+    ```json
     {
-      "id": 1,
-      "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
-      "horas": 65,
-      "codigo": "POO",
-      "frequencia": 1,
+      "statusCode": 200,
+      "data": [
+        {
+          "id": 1,
+          "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+          "horas": 65,
+          "codigo": "POO",
+          "frequencia": 1,
+          "links": [
+            {
+              "rel": "self",
+              "href": "http://localhost:8081/api/v1/materias/1"
+            },
+            {
+              "rel": "UPDATE",
+              "href": "http://localhost:8081/api/v1/materias"
+            },
+            {
+              "rel": "DELETE",
+              "href": "http://localhost:8081/api/v1/materias/1"
+            }
+          ]
+        }
+      ],
+      "timeStamp": 1628735814026,
       "links": [
         {
           "rel": "self",
-          "href": "http://localhost:8081/v1/materias/1"
-        },
-        {
-          "rel": "UPDATE",
-          "href": "http://localhost:8081/v1/materias"
-        },
-        {
-          "rel": "DELETE",
-          "href": "http://localhost:8081/v1/materias/1"
+          "href": "http://localhost:8081/api/v1/materias"
         }
       ]
     }
-  ],
-  "timeStamp": 1628735814026,
-  "links": [
-    {
-      "rel": "self",
-      "href": "http://localhost:8081/v1/materias"
-    }
-  ]
-}
-```
+    ```
+
+- Response 401 (Unauthorized)
 
 ### Consultar máteria por id
 
 **GET** `/materias/{id}` vai retornar:
 
-```json
-{
-  "statusCode": 200,
-  "data": {
-    "id": 1,
-    "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
-    "horas": 65,
-    "codigo": "POO",
-    "frequencia": 1
-  },
-  "timeStamp": 1628736338954,
-  "links": [
+- Response 200 (application/json)
+    ```json
     {
-      "rel": "self",
-      "href": "http://localhost:8081/v1/materias/1"
-    },
-    {
-      "rel": "GET_ALL",
-      "href": "http://localhost:8081/v1/materias"
-    },
-    {
-      "rel": "UPDATE",
-      "href": "http://localhost:8081/v1/materias"
-    },
-    {
-      "rel": "DELETE",
-      "href": "http://localhost:8081/v1/materias/1"
+      "statusCode": 200,
+      "data": {
+        "id": 1,
+        "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+        "horas": 65,
+        "codigo": "POO",
+        "frequencia": 1
+      },
+      "timeStamp": 1628736338954,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/materias/1"
+        },
+        {
+          "rel": "GET_ALL",
+          "href": "http://localhost:8081/api/v1/materias"
+        },
+        {
+          "rel": "UPDATE",
+          "href": "http://localhost:8081/api/v1/materias"
+        },
+        {
+          "rel": "DELETE",
+          "href": "http://localhost:8081/api/v1/materias/1"
+        }
+      ]
     }
-  ]
-}
-```
+    ```
 
-### Alterar materia por id
+- Response 404 (Not Found) - cadastro inexistente
+    ```json
+    {
+       "statusCode": 404,
+       "data": "Matéria não encontrada.",
+       "timeStamp": 1629228521823,
+       "links": []
+    }
+    ```
+
+- Response 401 (Unauthorized)
+
+### Alterar materia
 
 **PUT** `/materias` com *body*:
 
-```json
-{
-  "id": 1,
-  "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
-  "horas": 70,
-  "codigo": "POO",
-  "frequencia": 2
-}
-```
-**Response**
-
-```json
-{
-  "statusCode": 200,
-  "data": true,
-  "timeStamp": 1628736630946,
-  "links": [
+- Request (application/json)
+    ```json
     {
-      "rel": "self",
-      "href": "http://localhost:8081/v1/materias"
-    },
-    {
-      "rel": "UPDATE",
-      "href": "http://localhost:8081/v1/materias"
-    },
-    {
-      "rel": "GET_ALL",
-      "href": "http://localhost:8081/v1/materias"
-    },
-    {
-      "rel": "DELETE",
-      "href": "http://localhost:8081/v1/materias/1"
+      "id": 1,
+      "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+      "horas": 70,
+      "codigo": "POO",
+      "frequencia": 2
     }
-  ]
-}
-```
+    ```
+  
+- Response 200 (application/json)
 
-### excluir materia
+    ```json
+    {
+      "statusCode": 200,
+      "data": true,
+      "timeStamp": 1628736630946,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/materias"
+        },
+        {
+          "rel": "UPDATE",
+          "href": "http://localhost:8081/api/v1/materias"
+        },
+        {
+          "rel": "GET_ALL",
+          "href": "http://localhost:8081/api/v1/materias"
+        },
+        {
+          "rel": "DELETE",
+          "href": "http://localhost:8081/api/v1/materias/1"
+        }
+      ]
+    }
+    ```
+
+- Response 400 (Bad Request) - Erros na validação
+    ```json
+    {
+    "statusCode": 400,
+    "data": {
+        "data": "Informe o ID para alterar o cadastro",
+        "horas": "Permitido o mínimo de 34 horas por matéria.",
+        "codigo": "Informe o codigo da matéria",
+        "nome": "Informe o nome da matéria"
+    },
+    "timeStamp": 1629227304659,
+    "links": []
+    }
+    ```
+
+- Response 401 (Unauthorized)
+
+### excluir materia por id
 
 **DELETE** `/materias/{id}` sem *body*:
 
-**Response**
-
-```json
-{
-  "statusCode": 200,
-  "data": true,
-  "timeStamp": 1628736887404,
-  "links": [
+- Response 200 (application/json)
+    ```json
     {
-      "rel": "self",
-      "href": "http://localhost:8081/v1/materias/1"
-    },
-    {
-      "rel": "GET_ALL",
-      "href": "http://localhost:8081/v1/materias"
+      "statusCode": 200,
+      "data": true,
+      "timeStamp": 1628736887404,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/materias/1"
+        },
+        {
+          "rel": "GET_ALL",
+          "href": "http://localhost:8081/api/v1/materias"
+        }
+      ]
     }
-  ]
-}
-```
+    ```
+
+- Response 404 (Not Found) - cadastro inexistente
+    ```json
+    {
+       "statusCode": 404,
+       "data": "Matéria não encontrada.",
+       "timeStamp": 1629228521823,
+       "links": []
+    }
+    ```
+
+- Response 401 (Unauthorized)
+
+### CURSOS `http://localhost:8081/api/api/v1`
+**POST:** `/cursos` com *body*:
+
+- Request (application/json)
+    ```json
+    {
+      "nome": "BACHAREL EM SISTEMAS DE INFORMAÇÃO",
+      "codigo": "BSI",
+      "materias": [1]
+    }
+    ```
+
+- Response 201 (Created)
+
+    ```json
+    {
+      "statusCode": 201,
+      "data": true,
+      "timeStamp": 1629220404672,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/cursos"
+        },
+        {
+          "rel": "UPDATE",
+          "href": "http://localhost:8081/api/v1/cursos"
+        },
+        {
+          "rel": "GET_ALL",
+          "href": "http://localhost:8081/api/v1/cursos"
+        }
+      ]
+    }
+    ```
+
+- Response 400 (Bad Request) - Cadastro existente
+    ```json
+    {
+       "statusCode": 400,
+       "data": "curso já possui cadastro.",
+       "timeStamp": 1629227727801,
+       "links": []
+    }
+    ```
+
+- Response 400 (Bad Request) - Erros na validação
+    ```json
+    {
+      "statusCode": 400,
+      "data": {
+          "codigo": "tamanho deve ser entre 2 e 6",
+          "nome": "Informe o nome do curso"
+      },
+      "timeStamp": 1629228929281,
+      "links": []
+    }
+    ```
+
+- Response 401 (Unauthorized)
+
+### Obter lista de todos os cursos
+**GET** `/cursos` vai retornar:
+
+- Response 200 (application/json)
+    ```json
+    {
+      "statusCode": 200,
+      "data": [
+        {
+          "id": 1,
+          "nome": "BACHAREL EM SISTEMAS DE INFORMAÇÃO",
+          "codigo": "BSI",
+          "materias": [
+            {
+              "id": 1,
+              "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+              "horas": 65,
+              "codigo": "POO",
+              "frequencia": 1
+            }
+          ],
+          "links": [
+            {
+              "rel": "self",
+              "href": "http://localhost:8081/api/v1/cursos/1"
+            },
+            {
+              "rel": "UPDATE",
+              "href": "http://localhost:8081/api/v1/cursos"
+            },
+            {
+              "rel": "DELETE",
+              "href": "http://localhost:8081/api/v1/cursos/1"
+            }
+          ]
+        }
+      ],
+      "timeStamp": 1629220661293,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/cursos"
+        }
+      ]
+    }
+    ```
+  
+- Response 401 (Unauthorized)
+
+### Consultar curso por id
+**GET** `/cursos/{id}` vai retornar:
+
+- Response 200 (application/json)
+    ```json
+    {
+      "statusCode": 200,
+      "data": {
+        "id": 1,
+        "nome": "BACHAREL EM SISTEMAS DE INFORMAÇÃO",
+        "codigo": "BSI",
+        "materias": [
+          {
+            "id": 1,
+            "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+            "horas": 65,
+            "codigo": "POO",
+            "frequencia": 1
+          }
+        ],
+        "links": []
+      },
+      "timeStamp": 1629220693487,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/cursos/1"
+        },
+        {
+          "rel": "UPDATE",
+          "href": "http://localhost:8081/api/v1/cursos"
+        },
+        {
+          "rel": "DELETE",
+          "href": "http://localhost:8081/api/v1/cursos/1"
+        }
+      ]
+    }
+    ```
+
+- Response 404 (Not Found)
+    ```json
+    {
+       "statusCode": 404,
+       "data": "Curso não encontrado.",
+       "timeStamp": 1629228521823,
+       "links": []
+    }
+    ```
+
+- Response 401 (Unauthorized)
+
+###Consultar curso por codigo
+
+**GET** `/cursos/codigo-curso?codigo={codigo}` vai retornar:
+
+- Response 200 (application/json)
+    ```json
+    {
+      "statusCode": 200,
+      "data": {
+        "id": 1,
+        "nome": "BACHAREL EM SISTEMAS DE INFORMAÇÃO",
+        "codigo": "BSI",
+        "materias": [
+          {
+            "id": 1,
+            "nome": "PROGRAMAÇÃO ORIENTADA A OBJETOS",
+            "horas": 65,
+            "codigo": "POO",
+            "frequencia": 1
+          }
+        ],
+        "links": []
+      },
+      "timeStamp": 1629220693487,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/cursos/1"
+        },
+        {
+          "rel": "UPDATE",
+          "href": "http://localhost:8081/api/v1/cursos"
+        },
+        {
+          "rel": "DELETE",
+          "href": "http://localhost:8081/api/v1/cursos/1"
+        }
+      ]
+    }
+    ```
+
+- Response 404 (Not Found)
+    ```json
+    {
+       "statusCode": 404,
+       "data": "Curso não encontrado.",
+       "timeStamp": 1629228521823,
+       "links": []
+    }
+    ```
+
+- Response 401 (Unauthorized)
+
+###Alterar curso
+**PUT** `/cursos` com *body*:
+
+- Request (application/json)
+    ```json
+    {
+      "id": 1,
+      "nome": "BACHAREL EM SISTEMAS DE INFORMAÇÃO",
+      "codigo": "BSI",
+      "materias": [1,2]
+    }
+    ```
+  
+- Response 200 (application/json)
+    ```json
+    {
+      "statusCode": 200,
+      "data": true,
+      "timeStamp": 1629221204249,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://localhost:8081/api/v1/cursos"
+        },
+        {
+          "rel": "GET_ALL",
+          "href": "http://localhost:8081/api/v1/cursos"
+        },
+        {
+          "rel": "DELETE",
+          "href": "http://localhost:8081/api/v1/cursos/1"
+        }
+      ]
+    }
+    ```
+
+- Response 400 (Bad Request) - Erros na validação
+    ```json
+    {
+    "statusCode": 400,
+    "data": {
+        "data": "Informe o ID para alterar o cadastro",
+        "horas": "Permitido o mínimo de 34 horas por matéria.",
+        "codigo": "Informe o codigo da matéria",
+        "nome": "Informe o nome da matéria"
+    },
+    "timeStamp": 1629227304659,
+    "links": []
+    }
+    ```
+
+- Response 404 (Not Found)
+    ```json
+    {
+       "statusCode": 404,
+       "data": "Curso não encontrado.",
+       "timeStamp": 1629228521823,
+       "links": []
+    }
+    ```
+
+- Response 401 (Unauthorized)
+
+###Excluir curso
+
+**DELETE** `/cursos/{id}` sem *body*:
+
+- Response 200 (application/json)
+  ```json
+  {
+    "statusCode": 200,
+    "data": true,
+    "timeStamp": 1629221293353,
+    "links": [
+      {
+        "rel": "self",
+        "href": "http://localhost:8081/api/v1/cursos/1"
+      },
+      {
+        "rel": "GET_ALL",
+        "href": "http://localhost:8081/api/v1/cursos"
+      }
+    ]
+  }
+  ```
+
+- Response 404 (Not Found)
+    ```json
+    {
+       "statusCode": 404,
+       "data": "Curso não encontrado.",
+       "timeStamp": 1629228521823,
+       "links": []
+    }
+    ```
+
+- Response 401 (Unauthorized)
 
 ## Documentação da API com Swagger:
 
-`http://localhost:8081/v1/swagger-ui.html`
+`http://localhost:8081/api/swagger-ui.html`
 
 ## 🦸 Autor
 
