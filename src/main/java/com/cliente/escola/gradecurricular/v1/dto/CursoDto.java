@@ -17,11 +17,11 @@ public class CursoDto extends RepresentationModel<CursoDto> {
     private Long id;
 
     @NotBlank(message = "Informe o nome do curso")
-    @Size(min = 10, max = 30)
+    @Size(min = 10, max = 100)
     private String nome;
 
     @NotBlank(message = "Informe o codigo do curso")
-    @Size(min = 2, max = 5)
+    @Size(min = 2, max = 6)
     private String codigo;
 
     private List<Long> materias;
