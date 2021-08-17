@@ -77,7 +77,7 @@ As seguintes tecnologias foram usadas na construção do projeto:
 ## :mag_right: Resources api (v1):
 Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
-- ###Rescurso [/materias], Methods: GET, POST, PUT, DELETE
+###Rescurso [/materias], Methods: GET, POST, PUT, DELETE
     ```
     GET: /materias: para listar todas as materias  
     GET: /materias/frequencia/{id}: para listar todas as materias pela frequencia 
@@ -88,7 +88,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
     DELETE: /materias/{id}: para deletar uma materia 
   ```
 
-- ###Rescurso [/cursos], Methods: GET, POST, PUT, DELETE
+###Rescurso [/cursos], Methods: GET, POST, PUT, DELETE
     ```
     GET: /cursos: para listar todos os cursos  
     GET: /cursos/{id}: para listar o curso pelo id
@@ -98,18 +98,18 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
     DELETE: /cursos/{id}: para deletar um curso
   ```
 
-- ###Autorização para acessar todos os recursos:
+###Autorização para acessar todos os recursos:
   ```
   Authorization: Basic Auth [Username: root, Password: root]
   ```
 
-- ###Responses
+###Responses
     | Código | Descrição |
     |---|---|
     | `200` | Requisição executada com sucesso (Success).|
     | `201` | Requisição cadastrada com sucesso (Success).|
     | `400` | Erros de validação ou cadastro existente (Bad Request).|
-    | `401` | Dados de acesso inválidos.|
+    | `401` | Dados de acesso inválidos (Unauthorized).|
     | `404` | Registro pesquisado não encontrado (Not Found).|
 
 ### MATERIAS
@@ -467,7 +467,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-### CURSOS `http://localhost:8081/api/api/v1`
+###CURSOS `http://localhost:8081/api/api/v1`
 **POST:** `/cursos` com *body*:
 
 - Request (application/json)
@@ -528,7 +528,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-### Obter lista de todos os cursos
+###Obter lista de todos os cursos
 **GET** `/cursos` vai retornar:
 
 - Response 200 (application/json)
@@ -577,7 +577,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
   
 - Response 401 (Unauthorized)
 
-### Consultar curso por id
+###Consultar curso por id
 **GET** `/cursos/{id}` vai retornar:
 
 - Response 200 (application/json)
@@ -780,7 +780,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - Response 401 (Unauthorized)
 
-## Documentação da API com Swagger:
+##Documentação da API com Swagger:
 
 `http://localhost:8081/api/swagger-ui.html`
 
