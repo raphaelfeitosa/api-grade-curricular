@@ -1,7 +1,9 @@
-# api-grade-curricular
-API responsável pela manutenção curricular
+<h1 id="grade-curricular" align="rigth">
+			API responsável pela manutenção curricular
+</h1>
 
-## :speech_balloon: O que há neste documento
+
+## O que há neste documento
 
 - [Executando todos os testes](https://github.com/raphaelfeitosa/microservice-grade-curricular#executando-todos-os-testes)
 - [Executando o projeto com Docker](https://github.com/raphaelfeitosa/microservice-grade-curricular#executando-o-projeto-com-docker)
@@ -73,7 +75,8 @@ As seguintes tecnologias foram usadas na construção do projeto:
 - **[Swagger](https://swagger.io)**
 - **[Junit 5](https://junit.org/junit5)**
 - **[HATEOAS](https://spring.io/projects/spring-hateoas)**
-- **[Modelmapper](http://modelmapper.org/)**
+- **[Modelmapper](http://modelmapper.org)**
+- **[Docker](https://www.docker.com)**
 
 ## Recursos da API v1
 Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
@@ -815,3 +818,5 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/raphael-feitosa/) <a href="mailto:raphaelcs2@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
 <br />
+
+[⬆ Voltar ao topo](#grade-curricular)<br>
