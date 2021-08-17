@@ -1,5 +1,5 @@
 <h1 id="grade-curricular" align="rigth">
-			API responsável pela manutenção curricular
+			API Restfull responsável pela manutenção curricular
 </h1>
 
 
